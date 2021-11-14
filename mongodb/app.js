@@ -13,10 +13,10 @@ mongoose.connect(url,{
 .catch((e) => console.log("La conexion no se establecio" + e))
 
 
-moongose.connect(url,{
+moongose.connect(url,{ 
     useNewUrlParser: true,
     useUnifiedTopology:true,
-    useFindAndModify:true,
+    useFindAndModify:true, 
     useCreateIndex:true
 })
 .then( () => console.log("Conectado a Mongo"))
@@ -30,6 +30,7 @@ const personaSchema = moongose.Schema({
 
 const personaModel = moongose.model('personas', personaSchema)
 
+//MOSTRAR
 const Mostrar = async ()=>{
     const persona = await personaModel.find()
     console.log(personas)
@@ -46,6 +47,25 @@ const crear = async()=>{
     console.log(resultado);
 }
 
-//Mostrar()
+//EDITAR
+const actualizar = async(id)=>{
+    const persona = await personaModel.updateOne({_id:id},{
+        $set:{
+            nombre:'Aaron',
+            edad:20
+        }
+    })
+}
 
-crear()
+//ELIMINAR
+const eliminar = async(id)=>{
+const persona = personaModel.delateOne({_id:id})
+console.log(persona);
+}
+
+//LLAMADOS
+
+//Mostrar()
+//crear()
+//actualizar('61917188da6fab8e31990d4d')
+//eliminar('61917188da6fab8e31990d4d')
