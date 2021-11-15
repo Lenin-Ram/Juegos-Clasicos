@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="/src/style/style.css">
     <link rel="stylesheet" href="/src/components/tetris.js">
     <title>Tetris</title>
+    <style>
+        body{
+            height: 800px;
+            background-image: url(/public/img/Background.jpeg);
+            background-repeat:no-repeat;
+            background-position-x:center;
+            background-position-y:center;
+            background-size: 100rem;
+        }
+        h1 , p{
+          font-size: 36px;
+          color: rgb(75, 75, 191);
+          font-family: sans-serif;
+        }
+    </style>
 </head>
 <body onload='inicializa();'>
     <nav classname="navbar">
@@ -16,6 +31,11 @@
         </ul>
     </nav>  
     
+<div>
+    <h1>Tetris</h1>
+    <p> Tetris es un videojuego de lógica. Fue lanzado el 6 de junio de 1984</p>
+</div>
+
 <div>
     <canvas id='canvas' style='background-color:#aaaa; border:2px solid #000000;'></canvas>
     <script src="/src/components/tetris.js"></script>
