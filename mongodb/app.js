@@ -1,71 +1,32 @@
-const mongoose = require("mongoose");
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const app = express();
 
-const url = 'mongodb://localhost:27017/mongo1'
+const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended = false}));
 
-mongoose.connect(url,{
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-    useFindAndModify:true,
-    useCreateIndex:true
+app.use(express.static(path.join(_dirname, 'public')));
+
+const mongo_uri = 'mongodb://rebookadidaS1:Leninros@localhost/mongo1';
+
+mongoose.connect(mongo_uri, function(err){
+    if (err) {
+        throw err;
+    }else{
+        console.log('concectado a ${mongo_uri}');
+    }
+});
+
+app.get('/', (req, res) =>{
+
+});
+
+app.listen(3000, () => {
+    console.log('server started');
 })
-.then( () => console.log("Conectado a Mongo"))
-.catch((e) => console.log("La conexion no se establecio" + e))
 
-
-mongoose.connect(url,{ 
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-    useFindAndModify:true, 
-    useCreateIndex:true
-})
-.then( () => console.log("Conectado a Mongo"))
-.catch((e) => console.log("La conexion no se establecio" + e))
-
-// const personaSchema = moongose.Schema({
-//     nombre:String,
-//     edad:Number,
-//     pais:String
-// })
-
-// const personaModel = moongose.model('personas', personaSchema)
-
-// //MOSTRAR
-// const Mostrar = async ()=>{
-//     const persona = await personaModel.find()
-//     console.log(personas)
-// } 
-
-// //CREAR
-// const crear = async()=>{
-//     const persona = new personaModel({
-//         nombre:"juan",
-//         edad:24,
-//         pais:Bolivia
-//     })
-//     const resultado = await persona.save()
-//     console.log(resultado);
-// }
-
-// //EDITAR
-// const actualizar = async(id)=>{
-//     const persona = await personaModel.updateOne({_id:id},{
-//         $set:{
-//             nombre:'Aaron',
-//             edad:20
-//         }
-//     })
-// }
-
-// //ELIMINAR
-// const eliminar = async(id)=>{
-// const persona = personaModel.delateOne({_id:id})
-// console.log(persona);
-// }
-
-// //LLAMADOS
-
-// //Mostrar()
-// //crear()
-// //actualizar('61917188da6fab8e31990d4d')
-// //eliminar('61917188da6fab8e31990d4d')
+module.exports= app;
